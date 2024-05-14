@@ -1,6 +1,6 @@
 "use strict";
 
-let cart = [
+let products = [
     {item: "Bread", price: 3.29, quantity: 2},
    {item: "Milk", price: 4.09, quantity: 1},
    {item: "T-Bone Steak", price: 12.99, quantity: 2},
@@ -11,9 +11,18 @@ let cart = [
   ];
 
 
-let productNames = [];
-for (const product of cart){
-  productNames.push(product.item);
+// let productNames = [];
+// for (const product of products){
+//   productNames.push(product.item);
+// }
+
+//function to pass into map
+function getProductNames(product) {
+  return product.item;
 }
+
+//map creates an empty array, and them for every element in the array it pushes
+// that element into the empty array
+let productNames = products.map(product);
 
 console.log(productNames);
