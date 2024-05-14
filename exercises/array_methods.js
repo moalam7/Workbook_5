@@ -11,6 +11,7 @@ let products = [
   ];
 
 
+//secret stuff happening inside of map function
 // let productNames = [];
 // for (const product of products){
 //   productNames.push(product.item);
@@ -21,8 +22,19 @@ function getProductNames(product) {
   return product.item;
 }
 
-//map creates an empty array, and them for every element in the array it pushes
-// that element into the empty array
-let productNames = products.map(product);
+// let productNames = products.map(function getProductName(product) => {return product.item;})
+//same as
 
-console.log(productNames);
+// let productNames = products.map((product) => {return product.item;})
+//same as
+
+//map loops through array, creates a new array, and pushes things onto new array
+let productNames = products.map((product) => product.item);//shortest form possible
+
+// productNames.forEach(function print(productName)){
+//   console.log(productName);
+// }
+
+productNames.forEach((productName) => console.log(productName));
+
+// console.log(productNames);
