@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header></header>
+
+    <h1>Test Document</h1>
+
+    <div id="msgDiv">...</div>
+    <div class="msgArea">...</div>
+    <div>...</div>
+    <div>...</div>
+
+    <script>
+      "use strict";
+
+      const name = document.getElementById("nameField").value;
+      document.body.style.background = "yellow";
+
+      let msg = "User-agent: " + navigator.userAgent;
+      //window.navigator.userAgent window. before DOM and BOM objects optional
+
+      alert(location.href);
+
+      location.href = "https://www.traveltexas.com";
+
+      setTimeout(function () {
+        location.href = "https://www.traveltexas.com/";
+      }, 5000);
+
+      //window.open to open a new window
+      //window.close to close the current window
+
+      window.open("https://www.w3schools.com/js/js_htmldom.asp");
+
+      const msgDiv = document.getElementById("msgDiv");
+      msgDiv.innerHTML = "Your order is ready.";
+
+      const msgAreas = document.getElementsByClassName("msgArea");
+
+      let numMessageAreas = msgAreas.length;
+      for (let i = 0; i < numMessageAreas; i++) {
+        msgAreas[i].style.border = "2px solid red";
+      }
+
+      const allDivs = document.getElementsByTagName("div");
+
+      let numDivs = allDivs.length;
+      for (let i = 0; i < numDivs; i++) {
+        allDivs[i].style.border = "2px solid red";
+      }
+
+      //Use queryselector() when selecting a single element - to select id
+      //use '#id name'    returns null if element not found
+      //Use querySelectorAll() when welecting multiple elements
+      //returns 0 or more elements
+
+      //querySelector is EXTREMELY powerful
+
+      const nameField = document.querySelector("#nameField");
+      let name1 = nameField.value;
+
+      const msgAreas1 = document.querySelectorAll(".msgArea");
+
+      let numMessageAreas1 = msgAreas.length;
+      for (let i = 0; i < numMessageAreas; i++) {
+        msgAreas[i].style.border = "2px solid red";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Doc 2t</title>
+  </head>
+  <body>
+    <header></header>
+    <h1>Test Document 2</h1>
+    <div class="msgDiv">..</div>
+    <script>
+      "use strict";
+
+      // Example 1
+      // function display(item) {
+      //   console.log(item);
+      // }
+
+      // let colors = ["Red", "White", "Blue"];
+      // colors.forEach(display);
+
+      // Example 2 - Simplified
+      // let colors = ["Red", "White", "Blue"];
+
+      // colors.forEach(function (item) {
+      //   console.log(item);
+      // });
+
+      // Example 3 - MOST simplified
+      let colors = ["Red", "White", "Blue"];
+
+      colors.forEach((item) => {
+        console.log(item);
+      });
+
+      //HTMLCollection is NOT an array, even though scriptable, so you must call Array.from()
+
+      // Example 1 -
+      // const msgDivs = document.querySelectorAll(".msgDiv");
+      // Array.from(msgDivs).forEach(function (element) {
+      //   element.style.border = "2px solid red";
+      // });
+
+      //Example 2 - more simplified
+      const msgDivs = document.querySelectorAll(".msgDiv");
+
+      Array.from(msgDivs).forEach((element) => {
+        element.style.border = "2px solid red";
+      });
+    </script>
+  </body>
+</html>
