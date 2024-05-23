@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Images Demo</title>
+  </head>
+  <body>
+    <div>
+      <img src="images/image1.PNG" />
+      <p>Image</p>
+    </div>
+    <div>
+      <img src="images/image1.PNG" />
+      <p>Image</p>
+    </div>
+    <div>
+      <img src="images/image1.PNG" />
+      <p>Image</p>
+    </div>
+    <script>
+      // window.onload() = function() {
+
+      //   //Get all paragraph elements
+      //   const paragraphs = document.getElementsByTagName('p');
+
+      //   // Loop through each paragraph and set the border style
+      //   for (let i = 0; i < paragraphs.length; i++) {
+      //     paragraphs[i].style.border = '1px solid blue';
+      //   }
+      // }
+
+      window.onload = function () {
+        // Get all paragraph elements and convert to array
+        const paragraphs = Array.from(document.getElementsByTagName("p"));
+
+        // Loop through each paragraph and set the border style
+        paragraphs.forEach((paragraph) => {
+          paragraph.style.border = "1px solid black";
+        });
+      };
+    </script>
+  </body>
+</html>

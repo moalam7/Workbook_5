@@ -5,5 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Test Document 3</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <p>Working with value and innerHTML</p>
+    </header>
+
+    <input type="text" id="nameField" name="name" />
+    <input type="number" id="ageField" name="age" />
+
+    <select id="genderField" name="gender">
+      <option value="">Select One…</option>
+      <option value="F">Female</option>
+      <option value="M">Male</option>
+    </select>
+
+    <script>
+      const nameField = document.getElementById("nameField");
+      const ageField = document.getElementById("ageField");
+      const genderField = document.getElementById("genderField");
+
+      // getting values
+      let name = nameField.value;
+      let age = Number(ageField.value);
+      let gender = genderField.value; // "", "F", or "M"
+
+      // setting values
+      nameField.value = "";
+      ageField.value = "";
+      genderField.value = ""; // reset to "Select One…"
+
+      const divMsg = document.getElementById("divMsg");
+      divMsg.innerHTML = "An error occurred!";
+
+      //You can read or write the value of any element's HTML properties
+      // setting up an image
+      const img = document.getElementById("dogImg");
+      img.src = "images/corgi.jpg";
+      img.alt = "This is a photo of a really cute corgi!";
+
+      //Every property in CSS can be set using JS too
+      // In HTML, just need to make sure not to used reserved words!
+
+      //CSS property background-color, JS prop is backgoundColor, hyphen is omitted
+
+      //Can script inline styles as it overrides any other styles
+      //Generally try to avoid!
+
+      //You can set the class name of an element
+      //But this might be dangerous! You can delete any other classes assigned to the element
+
+      //Example
+      const img1 = document.getElementById("img");
+      img1.className = "borderedImg";
+
+      //It is better to add or remove a class from the class list that is already assigned to the element using classList
+      const myDiv = document.getElementById("myDiv");
+      myDiv.classList.add("myStyle");
+      //Similar logic applies to removing a class
+      myDiv.classList.remove("myStyle");
+    </script>
+  </body>
 </html>
