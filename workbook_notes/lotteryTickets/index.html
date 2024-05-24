@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Working with Tables</title>
+  </head>
+  <body>
+    <p><strong>notes</strong></p>
+    <p>insertRow() can be called on the table to create a new row</p>
+    <p>
+      the number inside the () or parameters, specifies where the ropw will be added, if -1, added to the end of the
+      table!
+    </p>
+    <p>
+      can call insertCell() on the table row to create a new cell! The number in the () specifies where the cell will be
+      added on the table row
+    </p>
+    <p>innerHTML property of the cell should be used to configure cell contents</p>
+
+    <div class="tableExample">
+      <h3>Outstanding Winning Lottery Tickets</h3>
+      <table id="winningTicketsTbl">
+        <tr>
+          <th>Ticket Number</th>
+          <th>Prize Amount</th>
+          <th>Expires</th>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      "use strict";
+      let winningTickets = [
+        { tixNum: "1001001", expires: "2022-09-05", prize: 100000 },
+        { tixNum: "1298711", expires: "2022-10-10", prize: 250000 },
+        // others not shown
+      ];
+
+      window.onload = () => {
+        loadWinningTicketsTable();
+      };
+
+      function loadWinningTicketsTable() {
+        //Find the table
+        let table = document.querySelector("#winningTicketsTbl");
+
+        //loop through the array
+        for (const winningTicket of winningTickets) {
+          //for each array element we will add certain information to the existing table
+
+          //Create an empty <tr> element and add it to the last position of the table
+          let row = table.insertRow(-1);
+
+          //Create new cells(<td> elements) and add text
+          let cell1 = row.insertCell(0);
+          cell1.innerHTML = winningTicket.tixNum;
+
+          let cell2 = row.insertCell(1);
+          cell2.innerHTML = `$${winningTicket.prize.toFixed(2)}`;
+
+          let cell3 = row.insertCell(2);
+          cell3.innerHTML = winningTicket.expires;
+        }
+      }
+    </script>
+  </body>
+</html>
