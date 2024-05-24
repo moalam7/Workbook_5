@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Images</title>
+  </head>
+  <body>
+    <header></header>
+
+    <!-- Dropdown to select image -->
+    <select id="imageList">
+      <option value="">Select image...</option>
+    </select>
+
+    <br />
+
+    <!-- Button to add images -->
+    <div>
+      <button type="button" id="addImageButton">Add Image</button>
+    </div>
+
+    <!-- Button to clear images -->
+    <div>
+      <button type="button" id="clearImageButton">Clear Images</button>
+    </div>
+
+    <!-- Div to hold the images -->
+    <div id="imageHolder"></div>
+
+    <script>
+      "use strict";
+
+      // Image array
+      let imageFiles = [
+        { id: "1", path: "images/Bond - StoryImage_3.jpg", description: "Bond Image" },
+        { id: "2", path: "images/Adams - StoryImage_2.jpg", description: "Adams Image" },
+        { id: "3", path: "images/Cabot - StoryImg.jpg", description: "Cabot Image" },
+        { id: "4", path: "images/Cannon - StoryImg_2.jpg", description: "Cannon Image" },
+        { id: "5", path: "images/Carrigain - StoryImage_2.jpg", description: "Carrigain Image" },
+        { id: "6", path: "images/Carters - StoryImage.jpg", description: "Carters Image" },
+      ];
+
+      // Get all the HTML elements
+      const imageList = document.querySelector("#imageList");
+      const addImageButton = document.querySelector("#addImageButton");
+      const clearImageButton = document.querySelector("#clearImageButton");
+      const imageHolder = document.querySelector("#imageHolder");
+
+      // Window onload function
+      window.onload = () => {
+        // Initial loading
+        loadImageFileDropdown();
+      };
+
+      // Function to load the image file dropdown
+      function loadImageFileDropdown() {
+        for (const imageFile of imageFiles) {
+          // Create an option tag for each object in the image file array
+          let option = new Option(imageFile.description, imageFile.id);
+          // Append the option to the select tag
+          imageList.appendChild(option);
+        }
+      }
+
+      //Function to display image
+    </script>
+  </body>
+</html>

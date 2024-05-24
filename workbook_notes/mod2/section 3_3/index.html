@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nodes</title>
+  </head>
+  <body>
+    <p>
+      Very often, you will find you need to dynamically create HTML! There are several ways you can add/remove/replace
+      nodes in the HTML doc!
+    </p>
+    <p>appendChild() -- adds the node to the end of the list of children of a specified parent node</p>
+    <p>removeChild() -- removes child node from specified parent node</p>
+    <p>replaceChild() -- replaces child node in a specified parent node with a different nope</p>
+    <p>
+      insertBefore() -- to work with sibling element of another element, inserts a node before the referenced node as a
+      child of a specified parent node
+    </p>
+    <p>no insertAfter() function, but with a little work, can code your own with helper func</p>
+
+    <div id="locationDiv"></div>
+    <div id="messageDiv"></div>
+
+    <div id="imagesDiv">
+      <img src="images/store.jpg" alt="The store" />
+      <img src="images/girl.jpg" alt="Girl's jacket" />
+      <img src="images/boy.jpg" alt="Boy's jacket" />
+      <img id="saleImg" src="images/sale.jpg" alt="Girl in a jacket" />
+    </div>
+
+    <script>
+      //creating elements in JS to append to HTML file!
+      let img = document.createElement("img");
+      img.src = "../images/image1.PNG";
+      img.alt = "A map of downtown Hartford";
+
+      //Get div id element
+      const locationDiv = document.querySelector("#locationDiv");
+      //Append new information under parent div, img now child of this div
+      locationDiv.appendChild(img);
+
+      //To create text node, use createTextNode()
+      let orderNum = 10123;
+      let message = `Your order number is: ${orderNum}`;
+
+      //Text Node created
+      let messageNode = document.createTextNode(message);
+
+      //Get div id
+      let messageDiv = document.querySelector("#messageDiv");
+      messageDiv.appendChild(messageNode);
+
+      // find the element to remove
+      //let saleImg = document.getElementById("saleImg");
+
+      // find the parent of the element to remove
+      // let imagesDiv = document.getElementById("imagesDiv");
+      //imagesDiv.removeChild(saleImg);
+
+      // create the new element
+      let closeoutImg = document.createElement("img");
+      closeoutImg.src = "images/lastMinuteSale.jpg";
+      closeoutImg.alt = "55% off close-out items";
+
+      // find the element to be replaced
+      let saleImg = document.getElementById("saleImg");
+
+      // find the parent and then replace the element
+      let imagesDiv = document.getElementById("imagesDiv");
+      imagesDiv.replaceChild(closeoutImg, saleImg);
+    </script>
+  </body>
+</html>
