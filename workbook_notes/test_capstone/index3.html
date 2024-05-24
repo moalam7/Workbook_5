@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Parks Filter</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+      .button-container {
+        margin-top: 10px;
+      }
+      .button-container button {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <select id="filterTypeSelect">
+        <option value="">Select filter type</option>
+        <option value="City">City</option>
+        <option value="State">State</option>
+        <option value="Type">Type</option>
+      </select>
+
+      <select id="filterValueSelect" style="display: none">
+        <option value="">Select a value</option>
+      </select>
+
+      <div class="button-container">
+        <button id="filterButton" style="display: none">Filter</button>
+        <button id="clearButton" style="display: none">Clear Filter</button>
+      </div>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+      const nationalParksArray = [
+        {
+          LocationID: "ABLI",
+          LocationName: "Abraham Lincoln Birthplace National Historical Park",
+          Address: "2995 Lincoln Farm Road",
+          City: "Hodgenville",
+          State: "Kentucky",
+          ZipCode: 42748,
+          Phone: "(270) 358-3137",
+          Fax: "(270) 358-3874",
+          Latitude: 37.535671,
+          Longitude: -85.7340637,
+          Location: {
+            coordinates: [-85.7340637, 37.535671],
+            type: "Point",
+          },
+        },
+        {
+          LocationID: "ACAD",
+          LocationName: "Acadia National Park",
+          Address: "P.O. Box 177",
+          City: "Bar Harbor",
+          State: "Maine",
+          ZipCode: 4609,
+          Phone: "(207) 288-3338",
+          Fax: "(207) 288-8813",
+          Visit: "https://www.nps.gov/acad/index.htm",
+          Latitude: 44.3385559,
+          Longitude: -68.2733346,
+          Location: {
+            coordinates: [-68.2733346, 44.3385559],
+            type: "Point",
+          },
+        },
+        {
+          LocationID: "ADAM",
+          LocationName: "Adams National Historical Park",
+          Address: "135 Adams Street",
+          City: "Quincy",
+          State: "Massachusetts",
+          ZipCode: 2169,
+          Phone: "(617) 770-1175",
+          Fax: "(617) 472-7562",
+          Latitude: 42.256412,
+          Longitude: -71.011167,
+          Location: {
+            coordinates: [-71.011167, 42.256412],
+            type: "Point",
+          },
+        },
+      ];
+
+      const parkTypesArray = [
+        "National Park",
+        "National Monument",
+        "Recreation Area",
+        "Scenic Trail",
+        "Battlefield",
+        "Historic",
+        "Memorial",
+        "Preserve",
+        "Island",
+        "River",
+        "Seashore",
+        "Trail",
+        "Parkway",
+      ];
+
+      function getParkType(locationName) {
+        for (const type of parkTypesArray) {
+          if (locationName.endsWith(type)) {
+            return type;
+          }
+        }
+        return "Other";
+      }
+
+      nationalPparksArray.forEach((park) => {
+        park.Type = getParkType(park.LocationName);
+      });
+
+      window.onload = function () {
+        const filterTypeSelect = document.getElementById("filterTypeSelect");
+        const filterValueSelect = document.getElementById("filterValueSelect");
+        const filterButton = document.getElementById("filterButton");
+        const clearButton = document.getElementById("clearButton");
+        const resultsDiv = document.getElementById("results");
+
+        const cities = [...new Set(nationalParksArray.map((park) => park.City))];
+        const states = [...new Set(nationalParksArray.map((park) => park.State))];
+        const types = [...new Set(nationalParksArray.map((park) => park.Type))];
+
+        filterTypeSelect.addEventListener("change", function () {
+          const selectedType = filterTypeSelect.value;
+
+          filterValueSelect.style.display = selectedType ? "inline-block" : "none";
+          filterButton.style.display = selectedType ? "inline-block" : "none";
+          clearButton.style.display = selectedType ? "inline-block" : "none";
+
+          let options = [];
+          if (selectedType === "City") {
+            options = cities;
+          } else if (selectedType === "State") {
+            options = states;
+          } else if (selectedType === "Type") {
+            options = types;
+          }
+
+          filterValueSelect.innerHTML = '<option value="">Select a value</option>';
+          options.forEach((option) => {
+            const opt = document.createElement("option");
+            opt.value = option;
+            opt.textContent = option;
+            filterValueSelect.appendChild(opt);
+          });
+        });
+
+        filterButton.addEventListener("click", function () {
+          const selectedType = filterTypeSelect.value;
+          const selectedValue = filterValueSelect.value;
+          resultsDiv.innerHTML = "";
+
+          if (!selectedValue) return;
+
+          const filteredParks = nationalParksArray.filter((park) => {
+            if (selectedType === "City") {
+              return park.City === selectedValue;
+            } else if (selectedType === "State") {
+              return park.State === selectedValue;
+            } else if (selectedType === "Type") {
+              return park.Type === selectedValue;
+            }
+            return false;
+          });
+
+          if (filteredParks.length > 0) {
+            const table = document.createElement("table");
+
+            // Create table header
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            const headers = ["Location Name", "Address", "City", "State", "Zip Code", "Phone", "Visit"];
+            headers.forEach((headerText) => {
+              const th = document.createElement("th");
+              th.textContent = headerText;
+              headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            // Create table body
+            const tbody = document.createElement("tbody");
+            filteredParks.forEach((park) => {
+              const row = document.createElement("tr");
+
+              const locationNameCell = document.createElement("td");
+              locationNameCell.textContent = park.LocationName;
+              row.appendChild(locationNameCell);
+
+              const addressCell = document.createElement("td");
+              addressCell.textContent = park.Address;
+              row.appendChild(addressCell);
+
+              const cityCell = document.createElement("td");
+              cityCell.textContent = park.City;
+              row.appendChild(cityCell);
+
+              const stateCell = document.createElement("td");
+              stateCell.textContent = park.State;
+              row.appendChild(stateCell);
+
+              const zipCodeCell = document.createElement("td");
+              zipCodeCell.textContent = park.ZipCode;
+              row.appendChild(zipCodeCell);
+
+              const phoneCell = document.createElement("td");
+              phoneCell.textContent = park.Phone;
+              row.appendChild(phoneCell);
+
+              const visitCell = document.createElement("td");
+              if (park.Visit) {
+                const visitLink = document.createElement("a");
+                visitLink.href = park.Visit;
+                visitLink.textContent = "Visit";
+                visitLink.target = "_blank";
+                visitCell.appendChild(visitLink);
+              } else {
+                visitCell.textContent = "N/A";
+              }
+              row.appendChild(visitCell);
+
+              tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+
+            resultsDiv.appendChild(table);
+          } else {
+            resultsDiv.textContent = "No parks found.";
+          }
+        });
+
+        clearButton.addEventListener("click", function () {
+          filterTypeSelect.value = "";
+          filterValueSelect.innerHTML = '<option value="">Select a value</option>';
+          filterValueSelect.style.display = "none";
+          filterButton.style.display = "none";
+          clearButton.style.display = "none";
+          resultsDiv.innerHTML = "";
+        });
+      };
+    </script>
+  </body>
+</html>
